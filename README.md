@@ -1,7 +1,7 @@
 # css-analyzer
 UA Web Challenge V (preliminary stage) middle/senior level
 
-Crawled site and find the css styles are present in the css tables, but not
+<b>.Description: </b> Crawled site and find the css styles are present in the css tables, but not
 used on the site.
 Print a list of "dead" styles in the following format:
 
