@@ -55,4 +55,31 @@ class Analyzer {
   		}
           return resultString.toString();
     }
+
+    public static String[] getContentInStyleTag(String pageString) {
+      String regex = "<style.+style>";
+      Pattern pattern = Pattern.compile(regex);
+      Matcher matcher = pattern.matcher(pageString);
+
+      String[] result = new String[100];
+      try {
+          int i = 0;
+          while (matcher.find()) {
+    	        String match = matcher.group();
+    	        result[i] = match;
+    	    }
+      }catch(Exception e){
+          System.out.println(e.getMessage());
+            return null;
+      }
+        return result;
+
+    }
+
+
+
+
+
+
+
 }
