@@ -1,0 +1,56 @@
+<project name = "StyleAnalyzer" default = "all">
+    <property name = "src.dir" value = "src" />
+    <property name = "build.dir" value = "build" />
+    <property name = "jar.dir" value = "build/jar" />
+    <property name = "classes.dir" value = "build/classes" />
+    <property name = "external.lib.dir" value = "lib"/>
+
+    <path id="compile.classpath">
+        <pathelement location = "${external.lib.dir}" />
+        <fileset dir = "${external.lib.dir}">
+          <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name = "make_dirs" description = "Make directiry for build">
+        <mkdir dir = "${src.dir}" />
+        <mkdir dir = "${build.dir}" />
+        <mkdir dir = "${classes.dir}" />
+    </target>
+
+   <target name = "compile" description = "Information about compile" depends = "make_dirs">
+        <javac destdir = "${classes.dir}" includeantruntime="false">
+            <classpath refid="compile.classpath" />
+            <src path = "${src.dir}" />
+        </javac>
+    </target>
+
+    <target name = "make_jar" description = "Make jar file" depends = "junit">
+        <jar destfile="${jar.dir}/css-analyzer.jar" basedir = "${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="StyleAnalyzer"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="junit" depends="compile">
+                <junit printsummary="yes" fork="yes" haltonfailure="yes">
+                        <classpath refid="compile.classpath" />
+                        <formatter type="brief" usefile="false" />
+                        <test name="TestCore" />
+                </junit>
+        </target>
+
+    <target name = "all" description = "Create build!" depends = "make_jar">
+        <echo>Make buid.</echo>
+    </target>
+
+
+    <target name = "clean" description = "Clean build">
+        <delete dir = "${build.dir}" />
+    </target>
+
+    <target name = "run" description = "Run programm">
+        <java jar = "${jar.dir}/css-analyzer.jar" fork = "true" />
+    </target>
+</project>
