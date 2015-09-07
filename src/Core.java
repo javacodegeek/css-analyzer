@@ -56,23 +56,41 @@ class Core {
           return resultString.toString();
     }
 
-    public static String[] getContentInStyleTag(String pageString) {
-      String regex = "<style.+style>";
-      Pattern pattern = Pattern.compile(regex);
-      Matcher matcher = pattern.matcher(pageString);
+    public static String[] getStyleContent(String pageString, String styleType) {
 
-      String[] result = new String[100];
-      try {
-          int i = 0;
-          while (matcher.find()) {
-    	        String match = matcher.group();
-    	        result[i] = match;
-    	    }
-      }catch(Exception e){
-          System.out.println(e.getMessage());
-            return null;
-      }
-        return result;
+        String[] result = new String[100];
+
+        switch (styleType) {
+            case "all":
+                        break;
+            case "link":
+                        break;
+            case "import_url":
+                        break;
+            case "style_tag":
+
+                        System.out.println(styleType);
+
+                        String regex = "<style.+style>";
+                        Pattern pattern = Pattern.compile(regex);
+                        Matcher matcher = pattern.matcher(pageString);
+                        try {
+                            int i = 0;
+                            while (matcher.find()) {
+                                String match = matcher.group();
+                                result[i] = match;
+                            }
+                        }catch(Exception e){
+                            System.out.println(e.getMessage());
+                              return null;
+                        }
+                        //  return result;
+
+                        break;
+            default:
+                        break;
+        }
+          return result;
 
     }
 
