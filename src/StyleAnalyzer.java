@@ -9,7 +9,7 @@ class StyleAnalyzer {
      for (int i = 0; i < args.length; i++) {
         System.out.println(core.validateUrl(args[i]));
 				if (core.validateUrl(args[i])) {
-						Core.getStyleContent(Core.getPageContent(args[i]), "style_tag");
+						Core.getStyleContent(Core.getPageContent(args[i]), "link");
 				}
      }
 	}

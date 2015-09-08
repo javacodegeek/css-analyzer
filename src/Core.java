@@ -57,23 +57,22 @@ class Core {
     }
 
     public static String[] getStyleContent(String pageString, String styleType) {
+        System.out.println("Method: 'getStyleContent'");
+        System.out.println("    @param: styleType = " + styleType);
 
-        String[] result = new String[100];
+        String[] result = new String[10];
+
+        String regex;
+        Pattern pattern;
+        Matcher matcher;
 
         switch (styleType) {
             case "all":
                         break;
             case "link":
-                        break;
-            case "import_url":
-                        break;
-            case "style_tag":
-
-                        System.out.println(styleType);
-
-                        String regex = "<style.+style>";
-                        Pattern pattern = Pattern.compile(regex);
-                        Matcher matcher = pattern.matcher(pageString);
+                        regex = "(<link).+(rel=\"stylesheet\")[^>]*(/>)";
+                        pattern = Pattern.compile(regex);
+                        matcher = pattern.matcher(pageString);
                         try {
                             int i = 0;
                             while (matcher.find()) {
@@ -84,7 +83,30 @@ class Core {
                             System.out.println(e.getMessage());
                               return null;
                         }
-                        //  return result;
+                        for(int i = 0; i < result.length; i++) {
+                          System.out.println(result[i]);
+                        }
+                        break;
+            case "import_url":
+                        break;
+            case "style_tag":
+                        regex = "<style.+style>";
+                        pattern = Pattern.compile(regex);
+                        matcher = pattern.matcher(pageString);
+                        try {
+                            int i = 0;
+                            while (matcher.find()) {
+                                String match = matcher.group();
+                                result[i] = match;
+                            }
+                        }catch(Exception e){
+                            System.out.println(e.getMessage());
+                              return null;
+                        }
+
+                        for(int i = 0; i < result.length; i++) {
+                          System.out.println(result[i]);
+                        }
 
                         break;
             default:
