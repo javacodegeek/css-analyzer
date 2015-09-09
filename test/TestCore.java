@@ -13,19 +13,23 @@ public class TestCore {
     @Test
     public void testCreatingTestCore() {
         Core testCore = Core.getInstance();
-        assertNotNull("Is object Core created?", testCore);
+        assertNotNull("failture - object Core not created", testCore);
     }
 
     @Test
     public void testValidateUrl() {
         Core testCore = Core.getInstance();
-        assertTrue("Is 'http://www.bbc.com valid' url? ",testCore.validateUrl("http://www.bbc.com"));
-        assertFalse("Is 'http://www.bbc.com invalid' url? ",testCore.validateUrl("unknow com"));
+        assertTrue("failture - 'http://www.bbc.com' is invalid url.",testCore.validateUrl("http://www.bbc.com"));
+        assertFalse("failture - 'unknow com' is valid url. ",testCore.validateUrl("unknow com"));
     }
 
-    /*@Test
-    public void testGetPageContent() {
-        Core testCore = Core.getInstance()
+    @Test
+    public void testTypeOfGetPageContent() {
+        Core testCore = Core.getInstance();
+        if (!(Core.getPageContent("http://www.bbc.com") instanceof String)) {
+            fail("failture - getPageContent not return String from correct url");
+        }
+    }
 
-    }*/
+
 }
