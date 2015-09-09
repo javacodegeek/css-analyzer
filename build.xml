@@ -56,6 +56,10 @@
     </target>
 
     <target name = "run" description = "Run programm">
-        <java jar = "${jar.dir}/css-analyzer.jar" fork = "true" />
+        <java jar = "${jar.dir}/css-analyzer.jar" fork = "true">
+            <arg value="https://medium.com"/>
+        </java>
+
+
     </target>
 </project>

@@ -60,7 +60,7 @@ class Core {
         System.out.println("Method: 'getStyleContent'");
         System.out.println("    @param: styleType = " + styleType);
 
-        String[] result = new String[10];
+        String[] result = new String[1000];
 
         String regex;
         Pattern pattern;
@@ -68,9 +68,14 @@ class Core {
 
         switch (styleType) {
             case "all":
+                        /*
+                          This code  join oint link, style_tag, import_url,
+                        */
                         break;
             case "link":
-                        regex = "(<link).+(rel=\"stylesheet\")[^>]*(/>)";
+                        //regex = "<link[^>]+?text/css[^>]*?>";
+                        regex = "<link.+text/css.+>";
+
                         pattern = Pattern.compile(regex);
                         matcher = pattern.matcher(pageString);
                         try {
@@ -78,16 +83,24 @@ class Core {
                             while (matcher.find()) {
                                 String match = matcher.group();
                                 result[i] = match;
+                                i++;
                             }
+
                         }catch(Exception e){
                             System.out.println(e.getMessage());
                               return null;
                         }
                         for(int i = 0; i < result.length; i++) {
+                          if (result[i] == null){
+                              break;
+                          }
                           System.out.println(result[i]);
                         }
                         break;
             case "import_url":
+                        /*
+                          code for getting al import url style in pageUrl/pageUrl
+                        */
                         break;
             case "style_tag":
                         regex = "<style.+style>";
@@ -98,6 +111,7 @@ class Core {
                             while (matcher.find()) {
                                 String match = matcher.group();
                                 result[i] = match;
+                                i++;
                             }
                         }catch(Exception e){
                             System.out.println(e.getMessage());
@@ -105,6 +119,9 @@ class Core {
                         }
 
                         for(int i = 0; i < result.length; i++) {
+                          if (result[i] == null){
+                              break;
+                          }
                           System.out.println(result[i]);
                         }
 
