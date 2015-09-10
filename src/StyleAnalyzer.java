@@ -1,7 +1,12 @@
+/**
+*@autor Evgeniy Safronov <a href="https://github.com/javacodegeek">github</>
+*@version 1.0
+*/
+
 import java.io.*;
 import java.util.*;
 
-class StyleAnalyzer {
+public class StyleAnalyzer {
 
 	private static Core core = Core.getInstance();
 

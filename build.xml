@@ -1,5 +1,6 @@
 <project name = "StyleAnalyzer" default = "all">
     <property name = "src.dir" value = "src" />
+    <property name = "docs.dir" value = "docs" />
     <property name = "test.dir" value = "test" />
     <property name = "build.dir" value = "build" />
     <property name = "jar.dir" value = "build/jar" />
@@ -18,6 +19,7 @@
 
     <target name = "make_dirs" description = "Make directiry for build">
         <mkdir dir = "${src.dir}" />
+        <mkdir dir = "${docs.dir}" />
         <mkdir dir = "${build.dir}" />
         <mkdir dir = "${classes.dir}" />
     </target>
@@ -30,7 +32,7 @@
         </javac>
     </target>
 
-    <target name = "make_jar" description = "Make jar file" depends = "junit">
+    <target name = "make_jar" description = "Make jar file" depends = "docs">
         <jar destfile="${jar.dir}/css-analyzer.jar" basedir = "${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="StyleAnalyzer"/>
@@ -46,6 +48,15 @@
                 </junit>
     </target>
 
+    <target name="docs" depends="junit">
+        <javadoc destdir="DOCS">
+            <classpath refid="test.classpath" />
+            <fileset dir="."/>
+        </javadoc>
+    </target>
+
+
+
     <target name = "all" description = "Create build!" depends = "make_jar">
         <echo>Make buid.</echo>
     </target>
@@ -53,13 +64,13 @@
 
     <target name = "clean" description = "Clean build">
         <delete dir = "${build.dir}" />
+        <delete dir = "${docs.dir}" />
     </target>
 
     <target name = "run" description = "Run programm">
         <java jar = "${jar.dir}/css-analyzer.jar" fork = "true">
             <arg value="https://medium.com"/>
         </java>
-
-
     </target>
+
 </project>
