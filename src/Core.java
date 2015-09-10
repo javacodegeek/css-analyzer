@@ -1,3 +1,9 @@
+/**
+* This class is a core of aprogramm constrain all imoprtant method
+*@autor Evgeniy Safronov <a href="https://github.com/javacodegeek">github</>
+*@version 1.0
+*/
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.BufferedReader;
@@ -10,7 +16,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-class Core {
+public class Core {
     private static Core instance;
     private Core() {}
 
@@ -21,6 +27,12 @@ class Core {
           return instance;
     }
 
+    /**
+    * This methid validate site url
+    * @param url       Site url String
+    * @return          <code>true</code> if url validate
+    *                  <code>false</code> if url invalidate.
+    */
     public static boolean validateUrl(String url) {
         String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         Pattern pattern = Pattern.compile(regex);
@@ -28,6 +40,12 @@ class Core {
           return m.matches();
     }
 
+    /**
+    * This method get content from site url
+    * @param pageUrl    url as String
+    * @return          <code>String[]</code> if have some Exception
+    *                  <code>null</code> if have Exception
+    */
     public static String getPageContent (String pageUrl) {
 
       URL url;
@@ -56,6 +74,15 @@ class Core {
           return resultString.toString();
     }
 
+
+    /**
+    * This method get style content from page content
+    * @param pageString content page from url as String
+    * @styleType       <code>all</code>, <code>link</code>,
+    *                  <code>import_url</code>, <code>style_tag</code>,
+    * @return          <code>Content</code> if have some Exception
+    *                  <code>null</code> if url invalidate.
+    */
     public static String[] getStyleContent(String pageString, String styleType) {
         System.out.println("Method: 'getStyleContent'");
         System.out.println("    @param: styleType = " + styleType);
@@ -132,11 +159,5 @@ class Core {
           return result;
 
     }
-
-
-
-
-
-
 
 }

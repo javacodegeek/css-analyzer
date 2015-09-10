@@ -55,12 +55,9 @@
         </javadoc>
     </target>
 
-
-
     <target name = "all" description = "Create build!" depends = "make_jar">
         <echo>Make buid.</echo>
     </target>
-
 
     <target name = "clean" description = "Clean build">
         <delete dir = "${build.dir}" />
